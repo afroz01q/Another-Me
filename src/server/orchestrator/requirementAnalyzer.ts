@@ -64,10 +64,34 @@ export async function analyzeUserRequirement(
     'website',
     'just build a website',
   ]
+  const wordCount = cleanPrompt.split(/\s+/).length
+  const mentionsFeatures =
+    normalized.includes('hero') ||
+    normalized.includes('feature') ||
+    normalized.includes('modal') ||
+    normalized.includes('pricing') ||
+    normalized.includes('contact') ||
+    normalized.includes('catalog') ||
+    normalized.includes('database') ||
+    normalized.includes('supabase') ||
+    normalized.includes('dark') ||
+    normalized.includes('light') ||
+    normalized.includes('theme')
+  const mentionsDomain =
+    normalized.includes('portfolio') ||
+    normalized.includes('ecommerce') ||
+    normalized.includes('store') ||
+    normalized.includes('restaurant') ||
+    normalized.includes('agency') ||
+    normalized.includes('dashboard') ||
+    normalized.includes('blog') ||
+    normalized.includes('saas')
+
   const isGeneric =
     genericWebsiteTriggers.includes(normalized) ||
-    ((normalized.startsWith('build a website') || normalized.startsWith('create a website') || normalized.startsWith('build an app')) &&
-      cleanPrompt.split(/\s+/).length <= 5)
+    ((normalized.includes('build') || normalized.includes('create') || normalized.includes('make') || normalized.includes('code')) &&
+      (normalized.includes('website') || normalized.includes('web app') || normalized.includes('app') || normalized.includes('site')) &&
+      (!mentionsFeatures || !mentionsDomain || wordCount < 12))
 
   if (isGeneric) {
     return {

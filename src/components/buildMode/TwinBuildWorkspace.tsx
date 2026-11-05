@@ -15,6 +15,7 @@ import { TwinPiPWidget } from './TwinPiPWidget'
 import { cn } from '@/lib/utils'
 import toast from 'react-hot-toast'
 import type { DeploymentProvider, GitHubResolutionStrategy, GitHubFileResolution } from '../../server/agentRuntime/types'
+import { SKILLS_CATALOG_DATA, getSkillsCatalogFiles, CANONICAL_RULES_CONTENT } from '../../server/agentRuntime/skillsCatalog'
 
 interface FileTreeNode {
   name: string
@@ -752,14 +753,18 @@ export function TwinBuildWorkspace({ onBackToTwin }: TwinBuildWorkspaceProps) {
     'package.json',
     'docs/architecture.md',
     'docs/requirements.md',
+    'docs/api-specs.md',
     'tasks/task-backlog.md',
     '.rules/check.sh',
-    '.rules/testBuild.sh',
     '.rules/contrast.yml',
     '.rules/require-button-interactions.yml',
+    '.rules/SelectItem.yml',
+    '.rules/slot-nesting.yml',
+    '.rules/supabase-edge-functions.yml',
+    '.rules/supabase-google-sso.yml',
+    '.rules/testBuild.sh',
     '.rules/toast-hook.yml',
-    '.skills/frontend-design/SKILL.md',
-    '.skills/web-design-guidelines/SKILL.md',
+    ...SKILLS_CATALOG_DATA.map((s) => `.skills/${s.slug}/SKILL.md`),
     'public/favicon.svg',
     'public/manifest.json',
     'src/main.js',
@@ -774,12 +779,19 @@ export function TwinBuildWorkspace({ onBackToTwin }: TwinBuildWorkspaceProps) {
     'src/utils/api.js',
     'supabase/config.toml',
     'supabase/migrations/01_initial_schema.sql',
+    'supabase/edge-functions/inquire/index.ts',
   ]
 
   const realWorkspaceFiles = workspaceFiles.filter((f) => !f.isDirectory).map((f) => f.relativePath)
   const rawFilesList = realWorkspaceFiles.length > 0 ? realWorkspaceFiles : Object.keys(currentProject.files)
   const filesList = rawFilesList.length > 0 ? rawFilesList : canonicalFallbackFiles
-  const activeCode = runtimeActiveFileContent || currentProject.files[currentProject.activeFilePath] || ''
+  const fallbackSkills = useMemo(() => getSkillsCatalogFiles(), [])
+  const activeCode =
+    runtimeActiveFileContent ||
+    currentProject.files[currentProject.activeFilePath] ||
+    CANONICAL_RULES_CONTENT[currentProject.activeFilePath] ||
+    fallbackSkills[currentProject.activeFilePath] ||
+    ''
 
   const [expandedFolders, setExpandedFolders] = useState<Set<string>>(() => {
     return new Set([
@@ -2049,13 +2061,20 @@ export function TwinBuildWorkspace({ onBackToTwin }: TwinBuildWorkspaceProps) {
 
                 {currentProject.status === 'awaiting_approval' && (
                   <div className="flex items-center gap-2 shrink-0">
-                    <button
-                      onClick={() => approveAndBuild()}
-                      className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-lg flex items-center gap-1.5 animate-pulse"
-                    >
-                      <CheckCheck size={16} />
-                      <span>Approve Blueprint</span>
-                    </button>
+                    {currentProject.plan.needsClarification ? (
+                      <span className="px-3.5 py-1.5 rounded-xl bg-amber-500/20 text-amber-300 border border-amber-500/30 text-xs font-semibold flex items-center gap-1.5">
+                        <HelpCircle size={14} />
+                        <span>Enquiry In Progress</span>
+                      </span>
+                    ) : (
+                      <button
+                        onClick={() => approveAndBuild()}
+                        className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold transition-all shadow-lg flex items-center gap-1.5 animate-pulse"
+                      >
+                        <CheckCheck size={16} />
+                        <span>Approve Blueprint</span>
+                      </button>
+                    )}
                     <button
                       onClick={() => setShowChangeInput(!showChangeInput)}
                       className="px-3 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-300 hover:text-white text-xs font-semibold transition-all border border-zinc-700"

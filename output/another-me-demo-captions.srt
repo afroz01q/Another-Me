@@ -1,0 +1,84 @@
+1
+00:00:01,000 --> 00:00:07,500
+Imagine an AI that doesn't just answer your questions, but actually understands you.
+
+2
+00:00:08,000 --> 00:00:14,200
+Meet Another Me — your personal AI digital twin.
+
+3
+00:00:16,000 --> 00:00:22,800
+Another Me is designed to create a deeply personalized AI experience.
+
+4
+00:00:23,500 --> 00:00:30,500
+It learns your preferences, remembers important information, and helps you interact with AI in a more natural way.
+
+5
+00:00:31,200 --> 00:00:39,000
+From daily workflows to contextual reasoning, your digital twin stays seamlessly aligned with who you are.
+
+6
+00:00:41,000 --> 00:00:49,500
+Through natural conversations, Another Me interacts with complete awareness of your personal context and preferences.
+
+7
+00:00:50,200 --> 00:00:58,000
+Every response reflects your chosen tone, communication style, and accumulated knowledge.
+
+8
+00:00:58,800 --> 00:01:06,500
+Making everyday interactions feel authentic, intuitive, and uniquely yours.
+
+9
+00:01:07,200 --> 00:01:14,000
+I can help you build your future and stay focused on those goals.
+
+10
+00:01:16,000 --> 00:01:23,500
+Unlike a traditional chatbot, Another Me is architected around persistent personal context.
+
+11
+00:01:24,200 --> 00:01:32,800
+Its structured memory system securely organizes your preferences, goals, and working projects.
+
+12
+00:01:33,500 --> 00:01:42,500
+While ensuring you remain in total control of your data with transparent verification and editing tools.
+
+13
+00:01:43,200 --> 00:01:49,200
+All stored locally and encrypted for complete user sovereignty.
+
+14
+00:01:51,000 --> 00:01:59,500
+Another Me brings AI interaction closer to natural conversation through voice and real-time digital twin synthesis.
+
+15
+00:02:00,200 --> 00:02:08,000
+With adaptive neural audio, responsive avatar visuals, and an autonomous full-stack workspace.
+
+16
+00:02:08,800 --> 00:02:16,500
+Your digital twin feels accessible, intuitive, and genuinely capable.
+
+17
+00:02:17,200 --> 00:02:24,000
+Enforcing development rules and structured skills across every file.
+
+18
+00:02:26,000 --> 00:02:34,000
+Our vision is simple: an AI that becomes exponentially more useful as it understands you better.
+
+19
+00:02:34,800 --> 00:02:44,000
+Another Me is a major leap toward a future where everyone has their own personalized digital companion.
+
+20
+00:02:45,000 --> 00:02:51,000
+This is Another Me — Your Personal AI Digital Twin.
+
+21
+00:02:52,000 --> 00:02:58,500
+Experience the future of personalized artificial intelligence.
+

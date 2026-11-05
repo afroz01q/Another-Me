@@ -13,6 +13,7 @@
 
 import fs from 'fs'
 import path from 'path'
+import { getSkillsCatalogFiles } from './skillsCatalog'
 
 export interface ProjectScaffoldContext {
   name?: string
@@ -111,56 +112,14 @@ max_visible_toasts: 3
 `,
 
     // ----------------------------------------------------------------
-    // 2. .skills FOLDER (Domain engineering standards)
+    // 2. .skills FOLDER (Complete 92 Domain Engineering Standards)
     // ----------------------------------------------------------------
-    '.skills/frontend-design/SKILL.md': `# Frontend Design Skill
-## Purpose
-Establish consistent, accessible, and responsive user interfaces.
-- Mobile-first responsive grid system
-- Semantic HTML tags (<header>, <main>, <section>, <nav>, <footer>)
-- Clean typography hierarchy and balanced whitespace
-`,
-
-    '.skills/web-design-guidelines/SKILL.md': `# Web Design Guidelines Skill
-## Standards
-- Accessible color contrast ratios
-- Smooth micro-interactions and transitions (150ms-250ms ease-out)
-- Glassmorphism surfaces with subtle borders (rgba(255,255,255,0.08))
-`,
-
-    '.skills/webpage-content/SKILL.md': `# Webpage Content Skill
-## Copywriting & Layout Rules
-- Compelling, benefit-driven headlines
-- Clear Call to Action (CTA) buttons
-- Structured feature cards with iconography
-`,
-
+    ...getSkillsCatalogFiles(),
     '.skills/theme-brand-guidelines/SKILL.md': `# Theme & Brand Guidelines Skill
 ## Primary Theme
 - Primary Brand Color: ${primaryColor}
 - Accent Color: ${accentColor}
 - Theme Background: ${isDark ? 'Dark / Obsidian' : 'Light / Clean'}
-`,
-
-    '.skills/spec-driven-development/SKILL.md': `# Spec-Driven Development Skill
-## Methodology
-1. Formulate architecture in \`docs/architecture.md\`
-2. Define schema in \`supabase/migrations/\`
-3. Implement modular components in \`src/components/\`
-4. Assemble and bind events in \`src/main.js\`
-`,
-
-    '.skills/systematic-debugging/SKILL.md': `# Systematic Debugging Skill
-## Protocol
-- Isolate runtime errors via console telemetry
-- Inspect DOM lifecycle and event listener bindings
-- Validate network and external resource responses
-`,
-
-    '.skills/payment-paypal/SKILL.md': `# Payment & Checkout Skill
-## Integration Specs
-- Sandbox / Production PayPal SDK integration hooks
-- Client-side checkout modal with order validation
 `,
 
     // ----------------------------------------------------------------

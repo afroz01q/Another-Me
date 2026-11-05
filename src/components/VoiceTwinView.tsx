@@ -332,7 +332,7 @@ export function VoiceTwinView() {
       const enquiry = websiteEnquiryRef.current
       websiteEnquiryRef.current = null
       const enrichedPrompt = `${enquiry.initialIntent}: ${text}`.trim()
-      const replyText = `Understood! I've noted your website requirements: "${text}". I am now generating your modular architecture across real code folders: .rules, .skills, docs, public, src, supabase, and tasks. Let's inspect the blueprint in Twin Build Mode!`
+      const replyText = `Understood! I've recorded your website requirements: "${text}". I am now structuring your complete project across real code folders: .rules (quality checks), .skills (domain engineering standards), docs (architecture & specs), public (assets & manifest), src (modular components & styles), supabase (database migrations), and tasks (roadmap backlog). Entering Twin Build Mode now!`
       setCurrentAssistantText(replyText)
       const assistantMsg: Message = {
         id: generateId(),
@@ -354,12 +354,20 @@ export function VoiceTwinView() {
     // Check for Twin Build Mode voice command
     const lower = text.toLowerCase()
     const isBuildCommand =
-      lower.includes('build a website') ||
+      (lower.includes('build') && (lower.includes('website') || lower.includes('site') || lower.includes('app') || lower.includes('webpage') || lower.includes('frontend') || lower.includes('project'))) ||
       lower.includes('create a website') ||
-      lower.includes('build an app') ||
       lower.includes('create an app') ||
-      lower.includes('code a website') ||
+      lower.includes('create a site') ||
       lower.includes('make a website') ||
+      lower.includes('make an app') ||
+      lower.includes('make a site') ||
+      lower.includes('code a website') ||
+      lower.includes('code an app') ||
+      lower.includes('i want a website') ||
+      lower.includes('i need a website') ||
+      lower.includes('i want to build a website') ||
+      lower.includes('can you build a website') ||
+      lower.includes('help me build a website') ||
       lower.includes('build mode') ||
       lower.startsWith('build a ') ||
       lower.startsWith('build me a ') ||
@@ -367,22 +375,35 @@ export function VoiceTwinView() {
 
     if (isBuildCommand) {
       const wordCount = text.trim().split(/\s+/).length
-      const hasSpecificDetails =
-        wordCount >= 7 &&
-        (lower.includes('for ') ||
-          lower.includes('with ') ||
-          lower.includes('portfolio') ||
-          lower.includes('ecommerce') ||
-          lower.includes('store') ||
-          lower.includes('restaurant') ||
-          lower.includes('agency') ||
-          lower.includes('dashboard') ||
-          lower.includes('blog'))
+      const mentionsFeatures =
+        lower.includes('hero') ||
+        lower.includes('feature') ||
+        lower.includes('modal') ||
+        lower.includes('pricing') ||
+        lower.includes('contact') ||
+        lower.includes('catalog') ||
+        lower.includes('database') ||
+        lower.includes('supabase') ||
+        lower.includes('theme') ||
+        lower.includes('dark') ||
+        lower.includes('light') ||
+        lower.includes('color')
+      const mentionsDomain =
+        lower.includes('portfolio') ||
+        lower.includes('ecommerce') ||
+        lower.includes('store') ||
+        lower.includes('restaurant') ||
+        lower.includes('agency') ||
+        lower.includes('dashboard') ||
+        lower.includes('blog') ||
+        lower.includes('saas')
+
+      const hasSpecificDetails = wordCount >= 12 && mentionsDomain && mentionsFeatures
 
       // If user provided a brief / generic prompt, ENQUIRE first! Do NOT use fake demo words!
       if (!hasSpecificDetails) {
         const replyText =
-          "I would love to build that for you! Before I generate the architecture and code folders, tell me: What kind of website or app are we building, what key sections or features do you need, and what design style or color theme do you prefer?"
+          "I would love to architect and build that for you! To write clean, production-grade code across all necessary folders, I need to enquire about a few key details:\n\n1. What type or domain is this website? (e.g. Portfolio, E-Commerce, SaaS, Creative Agency, Restaurant, Blog)\n2. What core sections or interactive features do you need? (e.g. Hero showcase, product grid, modal dialog, contact form, Supabase database)\n3. What design style or color theme do you prefer? (e.g. Obsidian Dark, Clean Light, Neon Cyberpunk, or custom colors)\n\nTell me your requirements, and I'll generate the full multi-folder architecture (.rules, .skills, docs, public, src, supabase, tasks)!"
         setCurrentAssistantText(replyText)
         const assistantMsg: Message = {
           id: generateId(),
